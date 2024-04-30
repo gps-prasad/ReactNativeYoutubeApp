@@ -1,20 +1,22 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import tabs from './screens/Tabs';
+import VideoScreen from './screens/VideoScreen';
+import ChannelScreen from './screens/ChannelScreen';
+import SearchPage from './screens/SearchPage';
+import { useEffect } from 'react';
+
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{headerShown:false}} initialRouteName='tabs'>
+        <Stack.Screen name='tabs' component={tabs} />
+        <Stack.Screen name='video' component={VideoScreen} />
+        <Stack.Screen name='channel' component={ChannelScreen}/>
+        <Stack.Screen name='search' component={SearchPage}/>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
