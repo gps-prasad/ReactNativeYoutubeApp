@@ -8,7 +8,7 @@ import Entypo from '@expo/vector-icons/Entypo'
 import VideoCard from "../components/VideoCard";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import axios from "axios";
-import { useEffect, useState, useLayoutEffect } from "react";
+import { useEffect, useState} from "react";
 import LoadingSpinner from "../components/LoadingSpinner";
 
 const VideoScreen = () => {  
@@ -111,14 +111,19 @@ const VideoScreen = () => {
           }
     }
 
-      useLayoutEffect(async()=>{
-        Promise.all([
+    const details_fetch = async() => {
+      const results = await Promise.all([
         fetchVideoDetails(),
         fetchChannelDetails(),
-        fetchSimillarVideos()]).then(()=>{
-          setLoading(false)
-          setID(route.params.videoID)
-        })
+        fetchSimillarVideos()
+      ]);
+      setID(route.params.videoID)
+      setLoading(false);
+      console.log('loading')
+    }
+
+      useEffect(()=>{
+        details_fetch();
       },[route.params.videoID])
     return (
         <>{loading?<LoadingSpinner/>:
@@ -127,7 +132,6 @@ const VideoScreen = () => {
         <YoutubePlayer
           height={220}
           videoId={ID}
-          className=""
         />
         </View>
         <ScrollView>

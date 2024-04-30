@@ -6,7 +6,7 @@ import ChannelScreen from './screens/ChannelScreen';
 import SearchPage from './screens/SearchPage';
 import { useEffect } from 'react';
 
-
+const Stack = createNativeStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
